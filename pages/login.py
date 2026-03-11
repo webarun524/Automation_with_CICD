@@ -5,24 +5,18 @@ class LoginPage:
         self.page = page
 
         # Locators
-        self.username_input = "//input[@placeholder='Username']"
-        self.password_input = "//input[@placeholder='Password']"
-        self.login_button = "//button[normalize-space()='Login']"
+        self.username_input = "//input[@id='username']"
+        self.password_input = "//input[@id='password']"
+        self.login_button = "//button[@id='submit']"
+        self.verify_message = "//h1[normalize-space()='Logged In Successfully']"
 
-        # add user locators
-        self.admin_menu = "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name'][normalize-space()='Admin']"
-        self.add_user_button = "//button[normalize-space()='Add']"
-
-
-    def open_login_page(self):
-        self.page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+        
 
     def login(self, username: str, password: str):
         self.page.fill(self.username_input, username)
         self.page.fill(self.password_input, password)
         self.page.click(self.login_button)
 
-    def add_user(self):
-        # This method is a placeholder for adding a user after login
-        self.page.click(self.admin_menu)
-        self.page.click(self.add_user_button)
+    def verify_login_successful(self):
+        assert self.page.is_visible(self.verify_message), "Login was not successful"
+        

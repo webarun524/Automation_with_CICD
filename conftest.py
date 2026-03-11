@@ -16,5 +16,6 @@ def browser(playwright):
 def page(browser):
     context = browser.new_context()
     page = context.new_page()
+    page.goto("https://practicetestautomation.com/practice-test-login/")
     yield page
     context.close()
